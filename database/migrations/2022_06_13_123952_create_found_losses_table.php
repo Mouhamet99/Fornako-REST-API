@@ -38,6 +38,6 @@ class CreateFoundLossesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('found_loss_declarations');
+        Schema::dropIfExists('found_losses');
     }
 }

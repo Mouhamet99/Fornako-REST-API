@@ -16,7 +16,8 @@ class CreateAuthenticationQuestionsTable extends Migration
         Schema::create('authentication_questions', function (Blueprint $table) {
             $table->id();
             $table->string('question')->default('');
-            $table->string('answer')->default('');
+            $table->string('given_answer')->default('');
+            $table->string('correct_answer')->default('');
             $table->timestamps();
         });
     }

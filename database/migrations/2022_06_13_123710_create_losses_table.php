@@ -38,6 +38,6 @@ class CreateLossesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('loss_declarations');
+        Schema::dropIfExists('losses');
     }
 }
