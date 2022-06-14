@@ -12,6 +12,6 @@ class Loss extends Model
 
     public function object()
     {
-        return $this->belongsTo(ObjectRessource::class);
+        return $this->belongsTo(ObjectRessource::class,'object_ressource_id');
     }
 }
