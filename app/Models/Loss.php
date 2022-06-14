@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Loss extends Model
 {
     use HasFactory;
+    protected $with = ['object'];
+
+    public function object()
+    {
+        return $this->belongsTo(ObjectRessource::class);
+    }
 }

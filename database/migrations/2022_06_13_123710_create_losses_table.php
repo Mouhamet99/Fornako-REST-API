@@ -16,7 +16,7 @@ class CreateLossesTable extends Migration
     {
         Schema::create('losses', function (Blueprint $table) {
             $table->id();
-              $table->string('name')->default('');
+            $table->text('title')->default('');
             $table->string('object_state')->default('');
             $table->string('object_description')->default('');
             $table->string('object_image')->default('');
