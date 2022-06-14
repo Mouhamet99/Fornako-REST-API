@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Http\Controllers\FoundLossController;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,6 +14,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        $this->call(
+            [
+                UsersTableSeeder::class,
+                CategoriesTableSeeder::class,
+                ObjectRessourcesTableSeeder::class,
+                LossesTableSeeder::class,
+                FoundLossesTableSeeder::class,
+            ]
+        );
     }
 }
