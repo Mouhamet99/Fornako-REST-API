@@ -7,3 +7,29 @@ POST http://localhost:8080/api/v1/users/login
 
 ###
 GET http://localhost:8000/api/losses/
+
+### GET ALL FOUNDLOSSES OBJECT
+GET http://localhost:8000/api/found-losses/
+### DELETE SPECIFIC FOUNDLOSSES OBJECT
+DELETE http://localhost:8000/api/found-losses/2
+
+### SHOW A SPECIFIC FOUNDLOSSES OBJECT
+GET http://localhost:8000/api/found-losses/4
+
+### ADD NEW FOUNDLOSSES OBJECT
+POST http://localhost:8000/api/found-losses/
+Content-Type: application/json
+
+ {
+    "title": "j'ai perdu mon passport",
+    "object_state": "neuf(ve)",
+    "object_description": "couleur noire",
+    "object_image": "https:\/\/via.placeholder.com\/300x300.png\/00eeee?text=cni_cdaoS",
+    "location": "dakar",
+    "date": "2022-05-15",
+    "user_id": 2,
+    "object_ressource_id": 9,
+    "returned": 0,
+    "created_at": "2022-06-13T11:38:58.000000Z",
+    "updated_at": "2022-06-13T11:38:58.000000Z"
+ }

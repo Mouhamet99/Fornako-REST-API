@@ -4,12 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Sanctum\HasApiTokens;
 
 class FoundLoss extends Model
 {
-    use HasFactory;
-      protected $with = ['object'];
-
+    use HasFactory, HasApiTokens;
+    protected $with = ['object'];
+    protected $guarded = [''];
     public function object()
     {
         return $this->belongsTo(ObjectRessource::class, 'object_ressource_id');
