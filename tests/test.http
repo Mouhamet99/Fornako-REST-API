@@ -10,17 +10,18 @@ GET http://localhost:8000/api/losses/
 
 ### GET ALL FOUNDLOSSES OBJECT
 GET http://localhost:8000/api/found-losses/
+
 ### DELETE SPECIFIC FOUNDLOSSES OBJECT
 DELETE http://localhost:8000/api/found-losses/2
 
 ### SHOW A SPECIFIC FOUNDLOSSES OBJECT
-GET http://localhost:8000/api/found-losses/4
+GET http://localhost:8000/api/found-losses/14
 
 ### ADD NEW FOUNDLOSSES OBJECT
 POST http://localhost:8000/api/found-losses/
 Content-Type: application/json
 
- {
+{
     "title": "j'ai perdu mon passport",
     "object_state": "neuf(ve)",
     "object_description": "couleur noire",
@@ -32,4 +33,14 @@ Content-Type: application/json
     "returned": 0,
     "created_at": "2022-06-13T11:38:58.000000Z",
     "updated_at": "2022-06-13T11:38:58.000000Z"
- }
+}
+
+### UPDATE A FOUNDLOSSE OBJECT
+PATCH http://localhost:8000/api/found-losses/14
+Content-Type: application/json
+
+{
+   "title": "Updated j'ai perdu mon visa et mon passport",
+    "object_state": "neuf(ve)",
+    "object_description": "couvré d'une couche de plastique"
+}

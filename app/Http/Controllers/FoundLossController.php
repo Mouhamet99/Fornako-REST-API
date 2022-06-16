@@ -18,7 +18,10 @@ class FoundLossController extends Controller
     public function index(): JsonResponse
     {
         $foundLosses = FoundLoss::all();
-        return response()->json($foundLosses);
+        return response()->json([
+            'success' => true,
+            'data' => $foundLosses
+        ]);
     }
 
     /**
@@ -37,8 +40,8 @@ class FoundLossController extends Controller
 
         $foundLoss = FoundLoss::create($request->all());
         return response()->json([
-            'status' => 'success',
-            'found_loss' => $foundLoss,
+            'success' => true,
+            'data' => $foundLoss,
         ]);
     }
 
@@ -50,16 +53,16 @@ class FoundLossController extends Controller
      */
     public function show(FoundLoss $foundLoss): JsonResponse
     {
-        if ($foundLoss->exists){
+        if (!$foundLoss->exists) {
             return response()->json([
-                'status' => 'error',
+                'success' => false,
                 'message' => 'Found loss not found',
             ], ResponseAlias::HTTP_NOT_FOUND);
         }
 
         return response()->json([
+            'success' => true,
             'data' => $foundLoss,
-            'message' => 'FoundLoss retrieved successfully'
         ]);
     }
 
@@ -68,11 +71,21 @@ class FoundLossController extends Controller
      *
      * @param Request $request
      * @param FoundLoss $foundLoss
-     * @return Response
+     * @return JsonResponse
      */
-    public function update(Request $request, FoundLoss $foundLoss)
+    public function update(Request $request, FoundLoss $foundLoss): JsonResponse
     {
+//        $request->validate([
+//            'object_ressource_id' => 'required|integer',
+//            'user_id' => 'required|integer',
+//            'date' => 'required|date',
+//        ]);
 
+        $foundLoss->update($request->all());
+        return response()->json([
+            'success' => true,
+            'data' => $foundLoss
+        ]);
     }
 
     /**
@@ -84,8 +97,13 @@ class FoundLossController extends Controller
     public function destroy(FoundLoss $foundLoss): JsonResponse
     {
         $result = $foundLoss->delete();
+        if (!$result) {
+            return response()->json([
+                'success' => false,
+            ], ResponseAlias::HTTP_NOT_FOUND);
+        }
         return response()->json([
-            'success' => $result
+            'success' => true,
         ], ResponseAlias::HTTP_OK);
     }
 }
