@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\LossRequest;
 use App\Models\Loss;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -31,14 +32,8 @@ class LossController extends Controller
      * @param Request $request
      * @return JsonResponse
      */
-    public function store(Request $request): JsonResponse
+    public function store(LossRequest $request): JsonResponse
     {
-        $this->validate($request, [
-            'object_ressource_id' => 'required|integer',
-            'user_id' => 'required|integer',
-            'date' => 'required|date',
-        ]);
-
         $loss = Loss::create($request->all());
         return response()->json([
             'success' => true,
