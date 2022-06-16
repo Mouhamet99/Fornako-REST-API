@@ -9,8 +9,10 @@ use Laravel\Sanctum\HasApiTokens;
 class FoundLoss extends Model
 {
     use HasFactory, HasApiTokens;
+
     protected $with = ['object'];
-    protected $guarded = [''];
+    protected $guarded = ['id'];
+
     public function object()
     {
         return $this->belongsTo(ObjectRessource::class, 'object_ressource_id');

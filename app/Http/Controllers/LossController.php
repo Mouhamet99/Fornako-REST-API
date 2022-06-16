@@ -6,6 +6,8 @@ use App\Models\Loss;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Symfony\Component\HttpFoundation\Response as ResponseAlias;
+
 
 class LossController extends Controller
 {
@@ -16,8 +18,11 @@ class LossController extends Controller
      */
     public function index(): JsonResponse
     {
-        $losses =  Loss::all();
-        return  response()->json($losses);
+        $losses = Loss::all();
+        return response()->json([
+            'success' => true,
+            'data' => $losses
+        ]);
     }
 
     /**
@@ -29,13 +34,16 @@ class LossController extends Controller
     public function store(Request $request): JsonResponse
     {
         $this->validate($request, [
-        'object_ressource_id' => 'required|integer',
-        'date' => 'required|date',
-        'description' => 'required|string',
-    ]);
+            'object_ressource_id' => 'required|integer',
+            'user_id' => 'required|integer',
+            'date' => 'required|date',
+        ]);
 
         $loss = Loss::create($request->all());
-        return response()->json($loss);
+        return response()->json([
+            'success' => true,
+            'data' => $loss
+        ]);
     }
 
     /**
@@ -46,7 +54,17 @@ class LossController extends Controller
      */
     public function show(Loss $loss): JsonResponse
     {
-        return response()->json($loss);
+        if (!$loss->exists) {
+            return response()->json([
+                'success' => false,
+                'message' => 'loss object not found'
+            ]);
+        }
+
+        return response()->json([
+            'success' => true,
+            'data' => $loss
+        ]);
     }
 
     /**
@@ -58,15 +76,15 @@ class LossController extends Controller
      */
     public function update(Request $request, Loss $loss): JsonResponse
     {
-         // La validation de données
-    $this->validate($request, [
-        'object_ressource_id' => 'required|integer',
-        'date' => 'required|date',
-        'description' => 'required|string',
-    ]);
+        // La validation de données
+        $this->validate($request, [
+            'object_ressource_id' => 'required|integer',
+            'date' => 'required|date',
+            'description' => 'required|string',
+        ]);
 
-    $loss->update($request->all());
-    return response()->json($loss);
+        $loss->update($request->all());
+        return response()->json($loss);
     }
 
     /**
@@ -77,7 +95,14 @@ class LossController extends Controller
      */
     public function destroy(Loss $loss): JsonResponse
     {
-        $loss->delete();
-        return response()->json(['message' => 'success']);
+        $result = $loss->delete();
+        if (!$result) {
+            return response()->json([
+                'success' => false,
+            ], ResponseAlias::HTTP_NOT_FOUND);
+        }
+        return response()->json([
+            'success' => true,
+        ], ResponseAlias::HTTP_OK);
     }
 }

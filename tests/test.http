@@ -1,12 +1,29 @@
-###
-POST http://localhost:8080/api/v1/users/login
+### GET ALL LOSSES OBJECT
+GET http://localhost:8000/api/losses/
+
+### ADD A LOSSE OBJECT
+POST http://localhost:8000/api/losses/
+Content-Type: application/json
+
 {
-    "email": "  @gmail.com ",
-    "password": "123456"
+     "title": "J'ai rammassé un passport",
+    "object_state": "abime(e)",
+    "object_description": "Harum atque perspiciatis quaerat quibusdam amet non et adipisci excepturi.",
+    "object_image": "https:\/\/via.placeholder.com\/300x300.png\/00ddaa?text=provident",
+    "location": "Javierview",
+    "date": "2021-12-05",
+    "user_id": 2,
+    "object_ressource_id": 10
 }
 
-###
-GET http://localhost:8000/api/losses/
+### SHOW A SPECIFIC LOSSES OBJECT
+GET http://localhost:8000/api/losses/13
+
+### DELETE SPECIFIC LOSSE OBJECT
+DELETE http://localhost:8000/api/losses/13
+
+### ================================
+
 
 ### GET ALL FOUNDLOSSES OBJECT
 GET http://localhost:8000/api/found-losses/
