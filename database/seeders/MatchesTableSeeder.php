@@ -2,8 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\FoundLoss;
+use App\Models\Loss;
 use App\Models\Match;
-use Database\Factories\LossFactory;
+use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Database\Seeder;
 
 class MatchesTableSeeder extends Seeder
@@ -15,6 +17,13 @@ class MatchesTableSeeder extends Seeder
      */
     public function run()
     {
-//        Match::factory()->count(4)->has()->create();
+//
+        Match::factory()->count(4)
+            ->state(new Sequence(
+                function ($sequence) {
+                    return ['loss_id' => Loss::all()->random(), 'found_loss_id' => FoundLoss::all()->random()];
+                },
+            ))
+            ->create();
     }
 }

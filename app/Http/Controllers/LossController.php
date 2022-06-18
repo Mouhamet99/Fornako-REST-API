@@ -29,12 +29,20 @@ class LossController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param Request $request
+     * @param LossRequest $request
      * @return JsonResponse
      */
     public function store(LossRequest $request): JsonResponse
     {
         $loss = Loss::create($request->all());
+
+        if (!$loss->exists) {
+            return response()->json([
+                'success' => false,
+                'message' => 'loss object not found'
+            ]);
+        }
+
         return response()->json([
             'success' => true,
             'data' => $loss
@@ -97,7 +105,7 @@ class LossController extends Controller
             ], ResponseAlias::HTTP_NOT_FOUND);
         }
         return response()->json([
-            'success' => true,
-        ], ResponseAlias::HTTP_OK);
+            'success' => true
+        ]);
     }
 }

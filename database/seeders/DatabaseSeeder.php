@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
                 ObjectRessourcesTableSeeder::class,
                 LossesTableSeeder::class,
                 FoundLossesTableSeeder::class,
+                MatchesTableSeeder::class,
             ]
         );
     }

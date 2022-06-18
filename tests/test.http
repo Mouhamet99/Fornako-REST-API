@@ -1,3 +1,5 @@
+### ================ L O O S S E S ================
+
 ### GET ALL LOSSES OBJECT
 GET http://localhost:8000/api/losses/
 
@@ -22,7 +24,7 @@ GET http://localhost:8000/api/losses/13
 ### DELETE SPECIFIC LOSSE OBJECT
 DELETE http://localhost:8000/api/losses/13
 
-### ================================
+### =============== F O U N D =================
 
 
 ### GET ALL FOUNDLOSSES OBJECT
@@ -61,3 +63,7 @@ Content-Type: application/json
     "object_state": "neuf(ve)",
     "object_description": "couvré d'une couche de plastique"
 }
+
+### =============== M A T C H E S =================
+GET http://localhost:8000/api/matches/
+

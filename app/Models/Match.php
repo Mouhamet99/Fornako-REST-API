@@ -9,15 +9,15 @@ class Match extends Model
 {
     use HasFactory;
 
-    protected $with = ['loss', 'found_loss'];
+    protected $guarded = ['id','created_at','updated_at'];
 
     public function loss()
     {
-        return $this->hasOne(Loss::class);
+        return $this->hasOne(Loss::class, 'id', 'loss_id');
     }
 
     public function foundLoss()
     {
-        return $this->hasOne(FoundLoss::class);
+        return $this->hasOne(FoundLoss::class, 'id', 'loss_id');
     }
 }
